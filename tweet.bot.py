@@ -35,7 +35,7 @@ def check_mentions(api, since_id):
 
 def main():
     api = get_api()
-    since_id = os.getenv("BOT_SINCEID")
+    since_id = int(os.getenv("BOT_SINCEID"))
     while True:
         since_id = check_mentions(api, since_id)
         logger.info("Waiting...")
