@@ -1,11 +1,11 @@
 name: geobot
 services:
-- environment_slug: geobotserv
+- environment_slug: geobot
   github:
     branch: main
     deploy_on_push: true
     repo: davidedelpapa/geobot
-  name: geobotserv
+  name: geobot
   run_command: gunicorn --worker-tmp-dir /dev/shm app:app
 workers:
   - environment_slug: twitterbot
