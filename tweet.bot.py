@@ -1,7 +1,9 @@
 import time
+import os
 import logging
 import tweepy
 import requests
+
 
 from config_tweepy import get_api
 
