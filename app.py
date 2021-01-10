@@ -22,6 +22,7 @@ def show_bbox(w, n, e, s):
     bbox = Bbox(float(w), float(n), float(e), float(s))
     try:
         content = request.get_json(force=True)
+        content = geojson.dumps(content)
     except Exception:
         content = None
 
@@ -97,6 +98,7 @@ def show_point(lon, lat):
     lonlat = LonLat(float(lon), float(lat))
     try:
         content = request.get_json(force=True)
+        content = geojson.dumps(content)
     except Exception:
         content = None
 
