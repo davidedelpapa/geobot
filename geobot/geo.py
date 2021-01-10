@@ -25,6 +25,12 @@ class Bbox:
     east: float
     south: float
 
+    def __post_init__(self):
+        self.west  = min(self.west, self.east)
+        self.north = max(self.north, self.south)
+        self.east  = max(self.west, self.east)
+        self.south = min(self.north, self.south)
+
     def to_tuple(self):
         ''' Returns a tuple of its coordinates (Raw Bbox) '''
         return(self.west, self.north, self.east, self.south)
@@ -94,6 +100,8 @@ class Bbox:
             zoom += 1
         if visible_tiles > len(self.to_tileset(zoom)):
             zoom += 1
+        # up to 18 max
+        zoom = 18 if zoom > 18 else zoom
         return zoom
     
     def fit_tileset(self, visible_tiles=None):
@@ -113,6 +121,9 @@ class Bbox:
         tileset = self.to_tileset(zoom)
         while visible_tiles >= len(self.to_tileset(zoom + 1)):
             zoom += 1
+            # up to 18 max
+            if zoom > 18:
+                break
             tileset = self.to_tileset(zoom)
         if visible_tiles > len(self.to_tileset(zoom)):
             tileset = self.to_tileset(zoom + 1)
@@ -261,6 +272,31 @@ class LonLat:
         if props is not None:
             p["properties"] = props
         return p
+    
+    def get_offset(self, dn, de):
+        ''' 
+        Returns the LatLon point to de East and dn North meters of this point
+
+        It uses the aviatory's algorithms (check: http://www.edwilliams.org/avform.htm) to 
+        approximate the new lon,lat position corrisponding to a east-west, north-south movement in meters
+        '''
+        # Earth Radius approximation
+        R=6378137
+
+        try:
+            dLon = de/(R * math.cos(math.pi*self.lat/180))
+            lon = self.lon + dLon * 180/math.pi 
+        except Exception:
+            lon = self.lon
+        
+        try:
+            dLat = dn/R
+            lat = self.lat + dLat * 180/math.pi
+        except Exception:
+            lat = self.lat
+        
+        return LonLat(lon, lat)
+
 
 def ragularize_lonlat(lon, lat):
     if lon > 180.0:

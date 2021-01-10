@@ -125,11 +125,8 @@ def draw_image(bbox: Bbox, getter: Tileget, out_size=(600, 600), geo_json=None, 
 
         # Resize
         if out_size is not None:
-            if crop_bbox is True:
-                image.harmonious_resize(out_size)
-            else:
-                image.resize(out_size)
-
+            image.harmonious_resize(out_size)
+            
         # Copyright Watermark
         if watermark is not None:
             image.watermark(watermark)
