@@ -1,0 +1,55 @@
+name: geobot
+services:
+- environment_slug: python
+  envs:
+  - key: MAPBOX_TOKEN
+    scope: RUN_TIME
+    type: SECRET
+    value: "Mpbox Api Token"
+  - key: MAPBOX_URL
+    scope: RUN_TIME
+    value: "https://api.mapbox.com/v4/mapbox.satellite"
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: davidedelpapa/geobot
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: geobot
+  routes:
+  - path: /
+  run_command: gunicorn --worker-tmp-dir /dev/shm app:app
+workers:
+- environment_slug: python
+  envs:
+  - key: API_HTTPS
+    scope: RUN_TIME
+    value: https://geobot-hcm6d.ondigitalocean.app/
+  - key: TWITTER_API_KEY
+    scope: RUN_TIME
+    type: SECRET
+    value: "Twitter Api Key"
+  - key: TWITTER_API_SECRET_KEY
+    scope: RUN_TIME
+    type: SECRET
+    value: "Twitter Api Key Secret"
+  - key: TWITTER_ACCESS_TOKEN
+    scope: RUN_TIME
+    type: SECRET
+    value: "Twitter Access Token"
+  - key: TWITTER_ACCESS_SECRET
+    scope: RUN_TIME
+    type: SECRET
+    value: "Twitter Access Secret"
+  - key: BOT_SINCEID
+    scope: RUN_TIME
+    value: "1"
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: davidedelpapa/geobotshow
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: geobotshow
+  run_command: python3 tweet.bot.py
