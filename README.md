@@ -15,7 +15,7 @@ If you want to know more, please follow the dev.to series:
 - [First installment](https://dev.to/davidedelpapa/dev-digitalocean-hackathon-geobot-a-geography-python-twitter-bot-tut-01-470o): setting the geobot server as DO App Platform Service
 - [Second installment](https://dev.to/davidedelpapa/dev-digitalocean-hackathon-geobot-a-geography-python-twitter-bot-tut-02-20j9): setting a twitter bot as DO App Platform Worker
 - [Third installment](https://dev.to/davidedelpapa/dev-digitalocean-hackathon-geobot-a-geography-python-twitter-bot-tut-03-9mk): adding geographic capabilities
-- [Hackathon Submission](): Submission Post (contains some rationale and reasoning about the project)
+- [Hackathon Submission](https://dev.to/davidedelpapa/dev-digitalocean-hackathon-geobot-a-geography-python-twitter-bot-submission-form-250a): Submission Post (contains some rationale and reasoning about the project)
 
 ## LICENSE
 
